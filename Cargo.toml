@@ -4,3 +4,15 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+serde = { version = "1", features = ["derive"] }
+uuid = { version = "1", features = ["v4", "serde"] }
+
+prost = "0.13"
+neko-tech-persistence = { git = "https://github.com/FlorianRoudaut/neko-tech-persistence.git", branch = "main" }
+
+[patch."https://github.com/FlorianRoudaut/neko-tech-persistence.git"]
+neko-tech-persistence = { path = "../neko-tech-persistence/" }
+
+[build-dependencies]
+prost-build = "0.13"
+protox = "0.7"

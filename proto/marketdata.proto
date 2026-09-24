@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package neko;
+
+message Key {
+    string id = 1;
+    uint64 version = 2;
+    string unique_name = 3;
+}
+
+message Metric {
+    Key key = 1;
+    uint32 rank = 2;
+}
+
+message MetricList {
+    repeated Metric metrics = 1;
+}
+
+message Source {
+    Key key = 1;
+    uint32 rank = 2;
+}
+
+message SourceList {
+    repeated Source sources = 1;
+}
+
+message MarketData {
+    Key key = 1;
+    uint32 source = 2;
+    uint32 metric_id = 3;
+    double value = 4;
+    uint32 timestamp = 5;
+}
+
+message MarketDataList {
+    repeated MarketData market_data = 1;
+}
