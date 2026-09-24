@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use neko_tech_persistence::Key;
+use uuid::Uuid;
 
 mod proto;
 
@@ -22,6 +23,7 @@ pub struct Source {
 #[derive(Serialize, Deserialize, Default)]
 pub struct MarketData {
     pub key: Key,
+    pub security_id: Uuid,
     pub source: u8,
     pub metric_id: u8,
     pub value: f64,

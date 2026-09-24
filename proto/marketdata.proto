@@ -30,8 +30,9 @@ message MarketData {
     Key key = 1;
     uint32 source = 2;
     uint32 metric_id = 3;
-    double value = 4;
-    uint32 timestamp = 5;
+    string security_id = 4;
+    double value = 5;
+    uint32 timestamp = 6;
 }
 
 message MarketDataList {

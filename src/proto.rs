@@ -43,6 +43,7 @@ pub fn market_data_to_proto(m: &MarketData) -> generated::MarketData {
         key: Some(key_to_proto(&m.key)),
         source: m.source as u32,
         metric_id: m.metric_id as u32,
+        security_id: m.security_id.to_string(),
         value: m.value,
         timestamp: m.timestamp,
     }
@@ -53,6 +54,7 @@ pub fn proto_to_market_data(p: generated::MarketData) -> MarketData {
         key: proto_to_key(p.key.unwrap_or_default()),
         source: p.source as u8,
         metric_id: p.metric_id as u8,
+        security_id: p.security_id.parse().unwrap_or_else(|_| Uuid::new_v4()),
         value: p.value,
         timestamp: p.timestamp,
     }
