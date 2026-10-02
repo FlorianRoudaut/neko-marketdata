@@ -27,6 +27,11 @@ pub fn compute_stats(ts: &TimeSeries) -> Option<Stats> {
     Some(Stats { mean, std })
 }
 
+/// Cumulative Distribution Function for N(mean, std_dev^2)
+pub fn normal_cdf_general(x: f64, mean: f64, std_dev: f64) -> f64 {
+    normal_cdf((x - mean) / std_dev)
+}
+
 /// Standard Normal Cumulative Distribution Function Φ(x)
 /// Returns P(X <= x) for a standard normal distribution N(0, 1)
 pub fn normal_cdf(x: f64) -> f64 {
