@@ -27,6 +27,33 @@ pub fn compute_stats(ts: &TimeSeries) -> Option<Stats> {
     Some(Stats { mean, std })
 }
 
+/// Standard Normal Cumulative Distribution Function Φ(x)
+/// Returns P(X <= x) for a standard normal distribution N(0, 1)
+pub fn normal_cdf(x: f64) -> f64 {
+    0.5 * (1.0 + erf(x / std::f64::consts::SQRT_2))
+}
+
+/// Error function approximation (Abramowitz and Stegun 7.1.26)
+/// Maximum error: 1.5e-7
+fn erf(x: f64) -> f64 {
+    if x < 0.0 {
+        return -erf(-x);
+    }
+
+    // Constants for the rational approximation
+    const P: f64 = 0.3275911;
+    const A1: f64 = 0.254829592;
+    const A2: f64 = -0.284496736;
+    const A3: f64 = 1.421413741;
+    const A4: f64 = -1.453152027;
+    const A5: f64 = 1.061405429;
+
+    let t = 1.0 / (1.0 + P * x);
+    let poly = ((((A5 * t + A4) * t + A3) * t + A2) * t + A1) * t;
+
+    1.0 - poly * (-x * x).exp()
+}
+
 /// Standard Normal Inverse Cumulative Distribution Function (probit)
 /// Approximates z = Φ⁻¹(p) for 0 < p < 1 using Acklam's algorithm.
 pub fn normal_inverse_cdf(p: f64) -> f64 {
