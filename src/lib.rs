@@ -11,4 +11,4 @@ pub use source::{Source, SOURCE};
 pub use market_data::{MarketData, MARKET_DATA};
 pub use time_series::{Step, TimeSeries};
 pub use helpers::to_log_return_series;
-pub use stats::{Stats, compute_stats, normal_cdf_general};
+pub use stats::{Stats, compute_stats, normal_cdf, normal_cdf_general};
